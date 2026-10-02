@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registrar reporte | Residuos Cusco</title>
+
+    <link rel="stylesheet" href="css/registro.css">
+</head>
+<body>
+    <header>
+        <h1>Municipalidad Provincial del Cusco</h1>
+        <p>Reporte de acumulación de residuos</p>
+
+        <nav aria-label="Navegación principal">
+            <a href="index.html">Inicio</a>
+            <a href="consulta.html">Mis reportes</a>
+            <button type="button" id="boton-salir">
+                Cerrar sesión
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section aria-labelledby="titulo-reporte">
+            <h2 id="titulo-reporte">Registrar un reporte</h2>
+
+            <p>
+                Indica dónde se encuentra la basura acumulada
+                y describe el problema.
+            </p>
+
+            <p class="aviso">
+                Completa la dirección y la descripción.
+                Al guardar recibirás un código de seguimiento.
+            </p>
+
+            <p id="usuario-activo"></p>
+
+            <form id="form-reporte">
+                <div class="campo">
+                    <label for="direccion">
+                        Dirección del lugar (obligatoria)
+                    </label>
+
+                    <input
+                        type="text"
+                        id="direccion"
+                        name="direccion"
+                        maxlength="200"
+                        placeholder="Ejemplo: Av. de la Cultura, cuadra 5"
+                        aria-describedby="ayuda-direccion"
+                        required
+                    >
+
+                    <small id="ayuda-direccion">
+                        Incluye una referencia que ayude a ubicar el lugar.
+                    </small>
+                </div>
+
+                <div class="campo">
+                    <label for="descripcion">
+                        Descripción del problema (obligatoria)
+                    </label>
+
+                    <textarea
+                        id="descripcion"
+                        name="descripcion"
+                        rows="6"
+                        placeholder="Describe qué residuos hay y dónde están acumulados."
+                        required
+                    ></textarea>
+                </div>
+
+                <button type="submit" disabled>
+                    Enviar reporte
+                </button>
+
+                <p id="mensaje-reporte" role="status"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            Proyecto académico de Diseño Web —
+            Denis Eduardo Campos Julca
+        </p>
+    </footer>
+
+    <script type="module" src="js/registro/registro.js"></script>
+</body>
+</html>

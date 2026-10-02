@@ -1,0 +1,145 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f3f6f4;
+    color: #24352b;
+}
+
+header {
+    padding: 28px 20px;
+    background-color: #185c3a;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-underline-offset: 4px;
+}
+
+main {
+    width: 90%;
+    max-width: 720px;
+    margin: 32px auto;
+}
+
+section {
+    padding: 28px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgb(0 0 0 / 8%);
+}
+
+h2 {
+    margin-top: 0;
+    color: #185c3a;
+}
+
+.aviso {
+    padding: 14px;
+    background-color: #fff4ce;
+    border-left: 4px solid #876600;
+    border-radius: 6px;
+}
+
+.campo {
+    margin-bottom: 22px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #78867d;
+    border-radius: 6px;
+    font: inherit;
+    color: #24352b;
+    background-color: white;
+}
+
+textarea {
+    resize: vertical;
+}
+
+small {
+    display: block;
+    margin-top: 6px;
+    color: #526158;
+}
+
+button {
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: #185c3a;
+    color: white;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #dce3de;
+    color: #46534b;
+    cursor: not-allowed;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid #b86e00;
+    outline-offset: 3px;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    section {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+nav button {
+    width: auto;
+    padding: 6px 14px;
+    border: 1px solid white;
+    background-color: transparent;
+}
+
+nav button:hover {
+    background-color: #104329;
+}
+
+nav {
+    align-items: center;
+}

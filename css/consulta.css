@@ -1,0 +1,139 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f3f6f4;
+    color: #24352b;
+}
+
+header {
+    padding: 28px 20px;
+    background-color: #185c3a;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-underline-offset: 4px;
+}
+
+nav button {
+    padding: 6px 14px;
+    border: 1px solid white;
+    border-radius: 6px;
+    background-color: transparent;
+    color: white;
+    font: inherit;
+    cursor: pointer;
+}
+
+nav button:hover {
+    background-color: #104329;
+}
+
+main {
+    width: 92%;
+    max-width: 1100px;
+    margin: 32px auto;
+}
+
+section {
+    padding: 28px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgb(0 0 0 / 8%);
+}
+
+h2 {
+    margin-top: 0;
+    color: #185c3a;
+}
+
+.tabla-contenedor {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: collapse;
+}
+
+caption {
+    padding: 12px 0;
+    text-align: left;
+    font-weight: bold;
+}
+
+th,
+td {
+    padding: 14px;
+    border-bottom: 1px solid #dce3de;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background-color: #185c3a;
+    color: white;
+}
+
+td {
+    overflow-wrap: anywhere;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f3f6f4;
+}
+
+.estado {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background-color: #e8eee9;
+    font-weight: bold;
+}
+
+a:focus-visible,
+button:focus-visible,
+.tabla-contenedor:focus-visible {
+    outline: 3px solid #b86e00;
+    outline-offset: 3px;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    section {
+        padding: 16px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+td a {
+    color: #185c3a;
+    font-weight: bold;
+    text-underline-offset: 3px;
+}

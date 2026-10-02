@@ -1,0 +1,183 @@
+* {
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f3f6f4;
+    color: #24352b;
+}
+
+header {
+    padding: 28px 20px;
+    background-color: #185c3a;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+nav,
+.acciones {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+nav {
+    justify-content: center;
+}
+
+nav a {
+    color: white;
+}
+
+nav button {
+    border: 1px solid white;
+}
+
+main {
+    width: 94%;
+    max-width: 1200px;
+    margin: 32px auto;
+}
+
+section {
+    margin-bottom: 24px;
+    padding: 24px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgb(0 0 0 / 8%);
+}
+
+h2 {
+    margin-top: 0;
+    color: #185c3a;
+}
+
+.campo {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #78867d;
+    border-radius: 6px;
+    font: inherit;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #185c3a;
+    color: white;
+    font: inherit;
+    cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+    background-color: #104329;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.boton-eliminar {
+    background-color: #a12b24;
+}
+
+.boton-eliminar:hover:not(:disabled) {
+    background-color: #7b201b;
+}
+
+.tabla-contenedor {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 950px;
+    border-collapse: collapse;
+}
+
+caption {
+    padding: 12px 0;
+    text-align: left;
+    font-weight: bold;
+}
+
+th,
+td {
+    padding: 12px;
+    border-bottom: 1px solid #dce3de;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background-color: #185c3a;
+    color: white;
+}
+
+td {
+    overflow-wrap: anywhere;
+}
+
+td button {
+    display: block;
+    margin-bottom: 8px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f3f6f4;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.tabla-contenedor:focus-visible {
+    outline: 3px solid #b86e00;
+    outline-offset: 3px;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    section {
+        padding: 16px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+}

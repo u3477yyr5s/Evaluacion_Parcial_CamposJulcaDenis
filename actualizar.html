@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Editar reporte | Residuos Cusco</title>
+
+    <link rel="stylesheet" href="css/actualizar.css">
+</head>
+<body>
+    <header>
+        <h1>Municipalidad Provincial del Cusco</h1>
+        <p>Actualización de reportes de residuos</p>
+
+        <nav aria-label="Navegación principal">
+            <a href="consulta.html">Mis reportes</a>
+            <a href="registro.html">Nuevo reporte</a>
+
+            <button type="button" id="boton-salir">
+                Cerrar sesión
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section aria-labelledby="titulo-actualizar">
+            <h2 id="titulo-actualizar">Editar reporte</h2>
+
+            <p id="datos-reporte"></p>
+            <p id="mensaje-actualizar" role="status">
+                Cargando reporte...
+            </p>
+
+            <form id="form-actualizar" hidden>
+                <div class="campo">
+                    <label for="direccion">Dirección</label>
+
+                    <input
+                        type="text"
+                        id="direccion"
+                        name="direccion"
+                        maxlength="200"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="descripcion">Descripción</label>
+
+                    <textarea
+                        id="descripcion"
+                        name="descripcion"
+                        rows="6"
+                        required
+                    ></textarea>
+                </div>
+
+                <button type="submit" id="boton-guardar" disabled>
+                    Guardar cambios
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            Proyecto académico de Diseño Web —
+            Denis Eduardo Campos Julca
+        </p>
+    </footer>
+
+    <script type="module" src="js/actualizar/actualizar.js"></script>
+</body>
+</html>

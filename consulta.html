@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mis reportes | Residuos Cusco</title>
+
+    <link rel="stylesheet" href="css/consulta.css">
+</head>
+<body>
+    <header>
+        <h1>Municipalidad Provincial del Cusco</h1>
+        <p>Consulta de reportes de residuos</p>
+
+        <nav aria-label="Navegación principal">
+            <a href="index.html">Inicio</a>
+            <a href="registro.html">Nuevo reporte</a>
+            <button type="button" id="boton-salir">
+                Cerrar sesión
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section aria-labelledby="titulo-consulta">
+            <h2 id="titulo-consulta">Mis reportes</h2>
+
+            <p id="usuario-activo"></p>
+
+            <p>
+                Aquí puedes revisar los reportes que registraste
+                y su estado de atención.
+            </p>
+
+            <p id="mensaje-consulta" role="status">
+                Cargando reportes...
+            </p>
+
+            <div
+                class="tabla-contenedor"
+                role="region"
+                aria-label="Tabla de mis reportes"
+                tabindex="0"
+            >
+                <table>
+                    <caption>Reportes de acumulación de residuos</caption>
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="cuerpo-reportes"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            Proyecto académico de Diseño Web —
+            Denis Eduardo Campos Julca
+        </p>
+    </footer>
+
+    <script type="module" src="js/consulta/consulta.js"></script>
+</body>
+</html>

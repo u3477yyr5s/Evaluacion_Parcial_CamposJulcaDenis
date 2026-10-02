@@ -1,0 +1,117 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f3f6f4;
+    color: #24352b;
+}
+
+header {
+    padding: 28px 20px;
+    background-color: #185c3a;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+nav a {
+    color: white;
+    text-underline-offset: 4px;
+}
+
+main {
+    width: 90%;
+    max-width: 1000px;
+    margin: 32px auto;
+}
+
+.aviso {
+    padding: 16px;
+    background-color: #fff4ce;
+    border-left: 4px solid #876600;
+    border-radius: 6px;
+}
+
+.formularios {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+
+section {
+    padding: 28px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgb(0 0 0 / 8%);
+}
+
+h2 {
+    margin-top: 0;
+    color: #185c3a;
+}
+
+.campo {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #78867d;
+    border-radius: 6px;
+    font: inherit;
+}
+
+button {
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: #185c3a;
+    color: white;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+    background-color: #104329;
+}
+
+button:disabled {
+    background-color: #dce3de;
+    color: #46534b;
+    cursor: not-allowed;
+}
+
+input:focus-visible,
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid #b86e00;
+    outline-offset: 3px;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+}
+
+@media (max-width: 700px) {
+    .formularios {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Acceso | Reportes de residuos Cusco</title>
+
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <header>
+        <h1>Acceso al sistema</h1>
+        <p>Reportes de acumulación de residuos — Cusco</p>
+
+        <nav aria-label="Navegación principal">
+            <a href="index.html">Volver al inicio</a>
+        </nav>
+    </header>
+
+    <main>
+        <p class="aviso">
+            Crea una cuenta de vecino para registrar y consultar tus reportes.
+        </p>
+
+        <div class="formularios">
+            <section aria-labelledby="titulo-login">
+                <h2 id="titulo-login">Iniciar sesión</h2>
+                <p>Ingresa con el correo y la contraseña de tu cuenta.</p>
+
+                <form id="form-login">
+                    <div class="campo">
+                        <label for="login-correo">Correo electrónico</label>
+                        <input
+                            type="email"
+                            id="login-correo"
+                            name="correo"
+                            autocomplete="username"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="login-contrasena">Contraseña</label>
+                        <input
+                            type="password"
+                            id="login-contrasena"
+                            name="contrasena"
+                            autocomplete="current-password"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" disabled>
+                        Iniciar sesión
+                    </button>
+
+                    <p id="mensaje-login" role="status"></p>
+                </form>
+            </section>
+
+            <section aria-labelledby="titulo-cuenta">
+                <h2 id="titulo-cuenta">Crear cuenta de vecino</h2>
+                <p>Regístrate para enviar y consultar tus reportes.</p>
+
+                <form id="form-cuenta">
+                    <div class="campo">
+                        <label for="cuenta-nombre">Nombre completo</label>
+                        <input
+                            type="text"
+                            id="cuenta-nombre"
+                            name="nombre"
+                            autocomplete="name"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="cuenta-correo">Correo electrónico</label>
+                        <input
+                            type="email"
+                            id="cuenta-correo"
+                            name="correo"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="cuenta-contrasena">Contraseña</label>
+                        <input
+                            type="password"
+                            id="cuenta-contrasena"
+                            name="contrasena"
+                            autocomplete="new-password"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" disabled>
+                        Crear cuenta
+                    </button>
+
+                    <p id="mensaje-cuenta" role="status"></p>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>Proyecto académico — Denis Eduardo Campos Julca</p>
+    </footer>
+
+    <script type="module" src="js/auth/login.js"></script>
+</body>
+</html>
