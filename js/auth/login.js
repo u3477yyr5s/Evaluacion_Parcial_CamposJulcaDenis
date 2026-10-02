@@ -88,6 +88,11 @@ formularioLogin.addEventListener("submit", async (evento) => {
             mensajeLogin.textContent = "La cuenta tiene un rol no válido.";
         }
     } catch (error) {
+        console.error("Error al iniciar sesión:", {
+            mensaje: error.message,
+            codigo: error.code
+        });
+
         mensajeLogin.textContent =
             "No se pudo iniciar sesión. Revisa la conexión con Neon.";
     } finally {
