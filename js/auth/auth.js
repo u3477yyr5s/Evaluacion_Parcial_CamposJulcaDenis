@@ -9,7 +9,7 @@ export async function registrarUsuario(nombre, correo, contrasena) {
 
 export async function iniciarSesion(correo, contrasena) {
     const usuarios = await sql`
-        SELECT id, nombre, rol
+        SELECT id, nombre, rol, turno
         FROM usuarios
         WHERE correo = ${correo}
           AND contrasena = ${contrasena};

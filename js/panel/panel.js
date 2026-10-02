@@ -15,6 +15,42 @@ if (usuario) {
     }
 }
 
+const HORARIOS = {
+    manana: "Mañana: 06:00–14:00",
+    tarde: "Tarde: 14:00–22:00",
+    noche: "Noche-madrugada: 22:00–06:00"
+};
+
+function obtenerTurnoActual() {
+    const hora = Number(
+        new Intl.DateTimeFormat("en-GB", {
+            timeZone: "America/Lima",
+            hour: "2-digit",
+            hourCycle: "h23"
+        }).format(new Date())
+    );
+
+    if (hora >= 6 && hora < 14) {
+        return "manana";
+    }
+
+    if (hora >= 14 && hora < 22) {
+        return "tarde";
+    }
+
+    return "noche";
+}
+
+function puedeModificar(usuario) {
+    if (usuario.rol === "administrador") {
+        return true;
+    }
+
+    return (
+        usuario.rol === "empleado" &&
+        usuario.turno === obtenerTurnoActual()
+    );
+}
 function iniciarPanel(usuario) {
     const formulario = document.getElementById("form-panel");
     const direccion = document.getElementById("direccion");
@@ -32,6 +68,46 @@ function iniciarPanel(usuario) {
 
     let idEdicion = null;
     let ocupado = false;
+    function mostrarTurno() {
+    const autorizado = puedeModificar(usuario);
+
+    document.getElementById("informacion-turno").textContent =
+        usuario.rol === "administrador"
+            ? "Administrador: acceso sin restricción horaria."
+            : HORARIOS[usuario.turno] ?? "Sin turno asignado.";
+
+    document.getElementById("hora-peru").textContent =
+        "Hora de Perú: " +
+        new Intl.DateTimeFormat("es-PE", {
+            timeZone: "America/Lima",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hourCycle: "h23"
+        }).format(new Date());
+
+    const aviso = document.getElementById("permiso-turno");
+
+    aviso.textContent = autorizado
+        ? "Puedes crear, editar estados y eliminar reportes."
+        : "Fuera de turno: únicamente puedes consultar.";
+
+    aviso.className = autorizado
+        ? "turno-activo"
+        : "turno-inactivo";
+}
+
+function verificarPermiso() {
+    if (puedeModificar(usuario)) {
+        return true;
+    }
+
+    mensaje.textContent =
+        "No puedes realizar esta operación fuera de tu turno.";
+
+    cambiarOcupado(ocupado);
+    return false;
+}
 
     document.getElementById("contenido-panel").hidden = false;
 
@@ -47,17 +123,22 @@ function iniciarPanel(usuario) {
     function cambiarOcupado(valor) {
         ocupado = valor;
 
-        guardar.disabled = valor;
-        cancelar.disabled = valor;
-        recargar.disabled = valor;
-        direccion.disabled = valor;
-        descripcion.disabled = valor;
-        estado.disabled = valor || idEdicion === null;
+        const bloquear = ocupado || !puedeModificar(usuario);
+
+        guardar.disabled = bloquear;
+        cancelar.disabled = ocupado;
+        recargar.disabled = ocupado;
+
+        direccion.disabled = bloquear;
+        descripcion.disabled = bloquear;
+        estado.disabled = bloquear || idEdicion === null;
 
         cuerpo.querySelectorAll("button").forEach((boton) => {
-            boton.disabled = valor;
+            boton.disabled = bloquear;
         });
-    }
+
+        mostrarTurno();
+}
 
     function prepararCreacion() {
         idEdicion = null;
@@ -70,7 +151,7 @@ function iniciarPanel(usuario) {
     }
 
     function prepararEdicion(reporte) {
-        if (ocupado) return;
+        if (ocupado || !verificarPermiso()) return;
 
         idEdicion = reporte.id;
 
@@ -138,7 +219,7 @@ function iniciarPanel(usuario) {
                 const editar = document.createElement("button");
                 editar.type = "button";
                 editar.textContent = "Editar";
-                editar.disabled = ocupado;
+                editar.disabled = ocupado || !puedeModificar(usuario);
                 editar.addEventListener("click", () => {
                     prepararEdicion(reporte);
                 });
@@ -147,7 +228,7 @@ function iniciarPanel(usuario) {
                 eliminar.type = "button";
                 eliminar.textContent = "Eliminar";
                 eliminar.className = "boton-eliminar";
-                eliminar.disabled = ocupado;
+                eliminar.disabled = ocupado || !puedeModificar(usuario);
                 eliminar.addEventListener("click", () => {
                     eliminarReporte(reporte);
                 });
@@ -195,6 +276,8 @@ function iniciarPanel(usuario) {
         }
 
         cambiarOcupado(true);
+
+        mensaje.classList.remove("confirmacion");
         mensaje.textContent = "Guardando...";
 
         try {
@@ -206,6 +289,7 @@ function iniciarPanel(usuario) {
 
                 mensaje.textContent =
                     "Reporte creado. Código: " + codigo;
+                animarConfirmacion(mensaje);
             } else {
                 const resultado = await sql`
                     UPDATE reportes_residuos
@@ -216,9 +300,12 @@ function iniciarPanel(usuario) {
                     RETURNING id;
                 `;
 
-                mensaje.textContent = resultado.length > 0
-                    ? "Reporte actualizado correctamente."
-                    : "El reporte ya no existe.";
+                if (resultado.length > 0) {
+                    mensaje.textContent = "Reporte actualizado correctamente.";
+                    animarConfirmacion(mensaje);
+                } else {
+                    mensaje.textContent = "El reporte ya no existe.";
+                }
             }
 
             prepararCreacion();
@@ -242,6 +329,9 @@ function iniciarPanel(usuario) {
 
         if (!confirmado) return;
 
+        mensaje.classList.remove("confirmacion");
+        mensaje.textContent = "Eliminando reporte...";
+
         cambiarOcupado(true);
 
         try {
@@ -255,9 +345,13 @@ function iniciarPanel(usuario) {
                 prepararCreacion();
             }
 
-            mensaje.textContent = resultado.length > 0
-                ? "Reporte eliminado."
-                : "El reporte ya había sido eliminado.";
+            if (resultado.length > 0) {
+                mensaje.textContent = "Reporte eliminado.";
+                animarConfirmacion(mensaje);
+            } else {
+                mensaje.textContent = "El reporte ya había sido eliminado.";
+                animarConfirmacion(mensaje);
+            }
 
             await cargarReportes();
         } catch (error) {
@@ -280,7 +374,12 @@ function iniciarPanel(usuario) {
         }
     });
 
+    cambiarOcupado(false);
     cargarReportes();
+
+    setInterval(() => {
+        cambiarOcupado(ocupado);
+    }, 1000);
 }
 
 function agregarCelda(fila, contenido) {
@@ -323,4 +422,9 @@ async function crearReporte(direccion, descripcion) {
             }
         }
     }
+}
+function animarConfirmacion(elemento) {
+    elemento.classList.remove("confirmacion");
+    void elemento.offsetWidth;
+    elemento.classList.add("confirmacion");
 }

@@ -45,6 +45,8 @@ function prepararFormulario(usuario) {
         }
 
         botonEnviar.disabled = true;
+
+        mensaje.classList.remove("confirmacion");
         mensaje.textContent = "Guardando reporte...";
 
         try {
@@ -57,6 +59,7 @@ function prepararFormulario(usuario) {
             mensaje.textContent =
                 "Reporte guardado. Tu código de seguimiento es: " + codigo;
 
+            animarConfirmacion(mensaje);
             formulario.reset();
         } catch (error) {
             mensaje.textContent =
@@ -101,4 +104,9 @@ async function guardarReporte(idUsuario, direccion, descripcion) {
             }
         }
     }
+}
+function animarConfirmacion(elemento) {
+    elemento.classList.remove("confirmacion");
+    void elemento.offsetWidth;
+    elemento.classList.add("confirmacion");
 }

@@ -109,6 +109,7 @@ async function iniciarEdicion(usuario) {
         }
 
         botonGuardar.disabled = true;
+        mensaje.classList.remove("confirmacion");
         mensaje.textContent = "Guardando cambios...";
 
         try {
@@ -135,6 +136,7 @@ async function iniciarEdicion(usuario) {
 
             mensaje.textContent =
                 "Cambios guardados correctamente. Puedes volver a Mis reportes.";
+            animarConfirmacion(mensaje);
         } catch (error) {
             mensaje.textContent =
                 "No se pudieron guardar los cambios. Intenta nuevamente.";
@@ -142,4 +144,9 @@ async function iniciarEdicion(usuario) {
             botonGuardar.disabled = !editable;
         }
     });
+}
+function animarConfirmacion(elemento) {
+    elemento.classList.remove("confirmacion");
+    void elemento.offsetWidth;
+    elemento.classList.add("confirmacion");
 }

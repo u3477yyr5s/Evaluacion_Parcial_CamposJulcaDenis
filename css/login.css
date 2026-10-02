@@ -115,3 +115,97 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+@keyframes entrada-seccion {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+main section {
+    animation: entrada-seccion 0.55s ease-out both;
+}
+
+main section:nth-of-type(2) {
+    animation-delay: 0.12s;
+}
+
+button,
+.boton {
+    transition:
+        background-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+button:hover:not(:disabled),
+.boton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgb(0 0 0 / 18%);
+}
+
+button:active:not(:disabled),
+.boton:active {
+    transform: translateY(0);
+}
+
+input,
+textarea,
+select {
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #185c3a;
+    box-shadow: 0 0 0 4px rgb(24 92 58 / 12%);
+}
+
+@keyframes confirmar-operacion {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.confirmacion {
+    padding: 14px;
+    border-left: 5px solid #185c3a;
+    border-radius: 6px;
+    background-color: #e5f4e9;
+    color: #104329;
+    animation: confirmar-operacion 0.4s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    main section,
+    .confirmacion {
+        animation: none;
+    }
+
+    button,
+    .boton,
+    input,
+    textarea,
+    select {
+        transition: none;
+    }
+
+    button:hover:not(:disabled),
+    .boton:hover {
+        transform: none;
+    }
+}
