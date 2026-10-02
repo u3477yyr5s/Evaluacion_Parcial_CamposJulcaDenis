@@ -93,8 +93,9 @@ formularioLogin.addEventListener("submit", async (evento) => {
             codigo: error.code
         });
 
-        mensajeLogin.textContent =
-            "No se pudo iniciar sesión. Revisa la conexión con Neon.";
+        mensajeLogin.textContent = error.message.includes("neon-local.js")
+            ? error.message
+            : "No se pudo iniciar sesión. Revisa la conexión con Neon.";
     } finally {
         botonLogin.disabled = false;
     }

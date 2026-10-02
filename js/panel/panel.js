@@ -1,5 +1,6 @@
 import { sql } from "../config/neon-config.js";
 import { exigirSesion, cerrarSesion } from "../auth/auth.js";
+import { HORARIOS, puedeModificar, normalizarTurno } from "./turnos.js";
 
 const usuario = exigirSesion();
 
@@ -15,42 +16,6 @@ if (usuario) {
     }
 }
 
-const HORARIOS = {
-    manana: "Mañana: 06:00–14:00",
-    tarde: "Tarde: 14:00–22:00",
-    noche: "Noche-madrugada: 22:00–06:00"
-};
-
-function obtenerTurnoActual() {
-    const hora = Number(
-        new Intl.DateTimeFormat("en-GB", {
-            timeZone: "America/Lima",
-            hour: "2-digit",
-            hourCycle: "h23"
-        }).format(new Date())
-    );
-
-    if (hora >= 6 && hora < 14) {
-        return "manana";
-    }
-
-    if (hora >= 14 && hora < 22) {
-        return "tarde";
-    }
-
-    return "noche";
-}
-
-function puedeModificar(usuario) {
-    if (usuario.rol === "administrador") {
-        return true;
-    }
-
-    return (
-        usuario.rol === "empleado" &&
-        usuario.turno === obtenerTurnoActual()
-    );
-}
 function iniciarPanel(usuario) {
     const formulario = document.getElementById("form-panel");
     const direccion = document.getElementById("direccion");
@@ -74,7 +39,7 @@ function iniciarPanel(usuario) {
     document.getElementById("informacion-turno").textContent =
         usuario.rol === "administrador"
             ? "Administrador: acceso sin restricción horaria."
-            : HORARIOS[usuario.turno] ?? "Sin turno asignado.";
+            : HORARIOS[normalizarTurno(usuario.turno)] ?? "Sin turno asignado.";
 
     document.getElementById("hora-peru").textContent =
         "Hora de Perú: " +
@@ -250,7 +215,7 @@ function verificarPermiso() {
     formulario.addEventListener("submit", async (evento) => {
         evento.preventDefault();
 
-        if (ocupado) return;
+        if (ocupado || !verificarPermiso()) return;
 
         const nuevaDireccion = direccion.value.trim();
         const nuevaDescripcion = descripcion.value.trim();
@@ -319,7 +284,7 @@ function verificarPermiso() {
     });
 
     async function eliminarReporte(reporte) {
-        if (ocupado) return;
+        if (ocupado || !verificarPermiso()) return;
 
         const confirmado = window.confirm(
             "¿Eliminar el reporte " +
